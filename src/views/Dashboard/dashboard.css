@@ -1,0 +1,451 @@
+body {
+    background: #0C1125;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    color: #fff;
+}
+
+/* hr {
+    width: 90%;
+    align-items: center;
+    height: 0px;
+    border: 0.5px solid rgba(195, 197, 203, 0.75);
+  } */
+
+.section-1 {
+    height: 389px;
+    margin: 2rem 4rem;
+    background: rgba(32, 37, 67, 0.5);
+    backdrop-filter: blur(5px);
+    border-radius: 5px;
+}
+
+.section-3 {
+    height: 389px;
+    margin: 2rem 4rem;
+    background: rgba(32, 37, 67, 0.5);
+    backdrop-filter: blur(5px);
+    border-radius: 5px;
+}
+
+.leftTable {
+    height: 180%;
+    width: 50%;
+    align-items: 'left';
+    margin: 0 1.5rem;
+}
+
+#leftTableid {
+    height: 200%;
+    width: 80%;
+}
+
+.epoch {
+    margin-left: 15rem;
+    display: inline;
+    text-align: right;
+    align-items: right;
+    height: 20px;
+}
+
+.rightTable {
+    height: 180%;
+    width: 50%;
+    margin: 0 1.5rem;
+    align-items: right;
+    text-align: right;
+
+}
+
+#rightTableid {
+    height: 200%;
+    width: 80%;
+
+}
+
+.section-1-header {
+    position: relative;
+    text-align: center;
+    top: 15px;
+
+    font-family: 'Nunito';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 22px;
+    line-height: 30px;
+    /* identical to box height */
+
+    color: #FFFFFF;
+}
+
+.container-section-1 {
+    display: flex;
+}
+
+.section-1-info {
+    display: flex;
+}
+
+.xyz {
+    display: flex;
+    margin: 2rem 4rem;
+}
+
+.section-2-1 {
+    height: 480px;
+    /* margin: 2rem 4rem; */
+    background: rgba(32, 37, 67, 0.5);
+    backdrop-filter: blur(5px);
+    border-radius: 5px;
+    /* margin-left: 30px; */
+    width: 70%;
+}
+
+.section-2-2 {
+    height: 480px;
+    /* margin: 2rem 4rem; */
+    background: rgba(32, 37, 67, 0.5);
+    backdrop-filter: blur(5px);
+    border-radius: 5px;
+    margin-left: 10px;
+    width: 30%;
+}
+
+.subdiv-1 {
+    margin-left: 30px;
+}
+
+.LatestNews {
+    position: relative;
+    text-align: left;
+    top: 10px;
+    left: 20px;
+}
+
+.section-2-header {
+    position: relative;
+    text-align: center;
+    top: 10px;
+    left: 20px;
+}
+
+.button {
+    height: 50px;
+    cursor: pointer;
+
+}
+
+.investNow .button {
+
+    border-radius: 5px;
+    opacity: 0.5;
+    text-align: center;
+    color: white;
+    background-color: rgba(32, 37, 67, 0.5);
+    border-color: white;
+    cursor: pointer;
+}
+
+.investNow1 {
+
+    width: 100%;
+    height: 40px;
+
+    padding-top: 5px;
+    color: white;
+    background-color: rgba(36, 209, 240, 0.5);
+    border-color: white;
+    cursor: pointer;
+}
+
+.bombbt4 {
+    height: 40px;
+    opacity: 0.7;
+    border-radius: 5px;
+    display: inline;
+    color: white;
+    background-color: rgba(32, 37, 67, 0.5);
+    border-color: white;
+    cursor: pointer;
+}
+
+.depos {
+    border-radius: 5px;
+
+    color: white;
+    background-color: rgba(0, 245, 171, 0.5);
+    border-color: white;
+}
+
+.button {
+    border-radius: 5px;
+    color: white;
+    width: 100%;
+    background-color: rgba(32, 37, 67, 0.5);
+    border-color: white;
+    cursor: pointer;
+}
+
+.token3 {
+    border-radius: 5px;
+    color: white;
+    background-color:rgba(32, 37, 67, 0.5);
+    border-color: white;
+    cursor: pointer;
+}
+
+.chats {
+    display: flex;
+}
+
+.discord {
+    margin: 10px;
+    width: 50%;
+}
+
+.docs {
+    margin: 10px;
+    width: 50%;
+}
+
+.Boardroom {
+    height: 102px;
+    text-align: left;
+
+}
+
+.Boardroomsub {
+    display: flex;
+}
+
+.Boardroomelement {
+    margin: 10px;
+}
+
+.Boardroombutton {
+    margin: 10px;
+}
+
+.Bshare {
+    display: flex
+}
+
+.Bshare1 {
+    margin: 10px;
+    text-align: right;
+}
+
+.Boardroom-below-disc {
+    margin-left: 300px;
+}
+
+.TVL {
+    display: inline;
+    margin: auto;
+    text-align: right;
+    width: 100%;
+}
+
+.TVL1 {
+    margin-top: 30px;
+    text-align: right;
+}
+
+.Boardlower {
+    width: 92px;
+    margin: 10px;
+    height: 52px;
+    text-align: right;
+}
+
+.Boardlower1 {
+    display: flex;
+    text-align: right;
+}
+
+.LatestNews {
+    text-align: center;
+}
+
+.claim {
+    border-radius: 5px;
+    margin: auto;
+    width: 40%;
+    text-align: right;
+}
+
+.Boardroom-below-disc {
+    text-align: right;
+}
+
+.lowebackbombfarms {
+    height: 375.25px;
+}
+
+.bombfarmshead {
+    margin-left: 10px;
+    width: 20%;
+}
+
+.tokenshead {
+    display: flex;
+
+}
+
+.token1 {
+    margin: 20px;
+    width: 50%;
+    text-align: left;
+}
+
+.token2 {
+    margin: auto;
+    width: 50%;
+    text-align: right;
+
+}
+
+.bombbtlower {
+    display: flex;
+}
+
+.bombbt1 {
+    margin: 20px;
+    width: 50%;
+    text-align: left;
+}
+
+.bombbt2 {
+
+    width: 50%;
+    text-align: left;
+}
+
+.bombbt3 {
+    margin: 50px;
+    width: 50%;
+    text-align: right;
+}
+
+
+.s3-div1 {
+    padding-top: 10px;
+    height: 20%;
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.s3-div1 {
+    padding-top: 10px;
+    height: 20%;
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.s3-div2 {
+    height: 40%;
+}
+
+.s3-div1-left {
+    width: 50%;
+    text-align: left;
+    margin-left: 30px;
+}
+
+.s3-div1-right {
+    margin-right: 30px;
+    widows: 50%;
+    text-align: right;
+}
+
+th,
+td {
+    padding: 15px;
+}
+
+.s3_div2-header {
+    margin-left: 30px;
+    margin-right: 30px;
+    margin-bottom: 5px;
+    display: flex;
+}
+
+.s3_div2_content {
+    display: flex;
+    margin-right: 30px;
+    margin-top: 10px;
+}
+
+.Boardroom {
+    text-align: left;
+    width: 50%;
+}
+
+.s3-div2-content-table {
+    width: 60%;
+}
+
+.s3part {
+    display: flex
+}
+
+.sec3-deposit {
+    width: 33.33%;
+    text-align: right;
+    margin-left: 50%;
+}
+
+.sec3-withdraw {
+    width: 33.33%;
+    text-align: right;
+}
+
+.sec3-rewards {
+    width: 33.33%;
+    text-align: right;
+}
+
+.s3-div3 {
+    height: 40%;
+    padding-bottom: 5px;
+}
+
+.motherBoard {
+    display: flex;
+}
+
+.s3-right {
+    display: flex;
+
+}
+
+.s3part2 {
+    text-align: right;
+
+}
+
+.Bonds {
+    margin-left: 40px;
+}
+
+.Bonds-content {
+    margin-left: 40px;
+}
+
+.footer {
+    display: flex;
+
+}
+
+.foter-child {
+    margin-top: 40px;
+    width: 37%;
+    text-align: center;
+}
+
+.foter-parent {
+    text-align: center;
+}
+
+.deep-footer {
+    margin-left: 210px;
+}
