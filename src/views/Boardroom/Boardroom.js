@@ -141,6 +141,7 @@ const Boardroom = () => {
                     <Harvest />
                   </StyledCardWrapper>
                   <Spacer />
+                
                   <StyledCardWrapper>
                     <Stake />
                   </StyledCardWrapper>

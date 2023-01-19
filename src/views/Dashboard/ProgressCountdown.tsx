@@ -67,10 +67,9 @@ const StyledProgress = styled.div<{progress: number}>`
 const StyledCardContentInner = styled.div`
   height: 100%;
   display: flex;
-  align-items: center;
+  align-items: right;
   justify-content: center;
   flex-direction: column;
-  // padding: ${(props) => props.theme.spacing[2]}px ${(props) => props.theme.spacing[4]}px;
 `;
 
 export default ProgressCountdown;

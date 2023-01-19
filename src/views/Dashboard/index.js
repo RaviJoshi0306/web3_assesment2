@@ -1,4 +1,4 @@
-import React , { useMemo} from "react"
+import React , { useMemo,useEffect} from "react"
 import "./dashboard.css"
 import useCurrentEpoch from '../../hooks/useCurrentEpoch';
 import ProgressCountdown from './ProgressCountdown';
@@ -15,6 +15,23 @@ import {getDisplayBalance} from '../../utils/formatBalance';
 import useTokenBalance from '../../hooks/useTokenBalance';
 import useBombFinance from '../../hooks/useBombFinance';
 import useBondsPurchasable from '../../hooks/useBondsPurchasable';
+
+import useStatsForPool from '../../hooks/useStatsForPool';
+import useBank from '../../hooks/useBank';
+import Page from "../../components/Page";
+import useTotalValueLocked from '../../hooks/useTotalValueLocked';
+import MetamaskFox from '../../assets/img/metamask-fox.svg';
+import bbond from '../../assets/img/bbond-256.png';
+import bomb from '../../assets/img/bomb.png';
+import bshares from '../../assets/img/bshares.png';
+import { Button } from "@material-ui/core";
+import useFetchBoardroomAPR from '../../hooks/useFetchBoardroomAPR';
+import useEarningsOnBoardroom from '../../hooks/useEarningsOnBoardroom';
+import useStakedBalanceOnBoardroom from '../../hooks/useStakedBalanceOnBoardroom';
+import useTotalStakedOnBoardroom from '../../hooks/useTotalStakedOnBoardroom';
+import bombbtc from '../../assets/img/bomb-btc-lp-512.png';
+import bsharebnb from '../../assets/img/bshare-bnb-lp-512.png';
+// import {Typography} from '@material-ui/core';
 const Dashboard=()=> {
     const bShareStats = usebShareStats();
     const bombStats = useBombStats();
@@ -28,6 +45,7 @@ const BackgroundImage = createGlobalStyle`
     background-color: #171923;
   }
 `;
+
 const bShareCirculatingSupply = useMemo(
     () => (bShareStats ? String(bShareStats.circulatingSupply) : null),
     [bShareStats],
@@ -64,14 +82,37 @@ const bShareCirculatingSupply = useMemo(
   const bombFinance = useBombFinance();
   const bondBalance = useTokenBalance(bombFinance?.BBOND);
   const bondsPurchasable = useBondsPurchasable();
+
+
+  useEffect(() => window.scrollTo(0, 0));
+  const bankId = "BombBtcbLPBShareRewardPool"; 
+  const bank = useBank(bankId);
+  let statsOnPool = useStatsForPool(bank);
+
+  const bankId_ = "BshareBnbLPBShareRewardPool"; 
+  const bank_ = useBank(bankId_);
+  const TVL = useTotalValueLocked();
+  let statsOnPool_ = useStatsForPool(bank_);
+  const boardroomAPR = useFetchBoardroomAPR();
+  const earnings = useEarningsOnBoardroom();
+  const stakedBalance = useStakedBalanceOnBoardroom();
+  const tokenPriceInDollars = useMemo(
+    () => (bombStats ? Number(bombStats.priceInDollars).toFixed(2) : null),
+    [bombStats],
+  );
+  const earnedInDollars = (Number(tokenPriceInDollars) * Number(getDisplayBalance(earnings))).toFixed(2);
+  const totalStaked = useTotalStakedOnBoardroom();
   return (
+    <Page>
+
     <div className="App">
         <BackgroundImage/>
       <div className="section-1">
         <div className="section-1-header">
           <h4>Bomb Finance Summary</h4>
-        </div>
         <hr />
+        </div>
+        
         <div className="container-section-1">
           <div className="leftTable">
             <div className="row">
@@ -84,26 +125,57 @@ const bShareCirculatingSupply = useMemo(
                       <th scope="col">Current Supply</th>
                       <th scope="col">Total Supply</th>
                       <th scope="col">Price</th>
+                      <th> </th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
-                      <th scope="row">$BOMB</th>
+                      <th> <img alt="bomb" style={{ width: '30px' }} src={bomb} /></th>
+                      <th scope="row"> $BOMB</th>
                       <td>  {roundAndFormatNumber(bombCirculatingSupply, 2)}</td>
                       <td>{roundAndFormatNumber(bombTotalSupply, 2)}</td>
                       <td>  {bombPriceInBNB ? bombPriceInBNB : '-.----'} BTC  ${bombPriceInDollars ? roundAndFormatNumber(bombPriceInDollars, 2) : '-.--'}</td>
+                      <td><Button
+                            onClick={() => {
+                              bombFinance.watchAssetInMetamask('BOMB');
+                            }}
+                          >
+                            {' '}
+                            <b>+</b>&nbsp;&nbsp;
+                            <img alt="metamask fox" style={{ width: '20px' }} src={MetamaskFox} />
+                          </Button></td>
                     </tr>
                     <tr>
-                      <th scope="row">$BSHARE</th>
+                    <th> <img alt="bshare" style={{ width: '30px' }} src={bshares} /></th>
+                      <th scope="row"> $BSHARE</th>
                       <td>{roundAndFormatNumber(bShareCirculatingSupply, 2)}</td>
                       <td> {roundAndFormatNumber(bShareTotalSupply, 2)}</td>
                       <td> {bSharePriceInBNB ? bSharePriceInBNB : '-.----'} BNB   ${bSharePriceInDollars ? bSharePriceInDollars : '-.--'}</td>
+                      <td><Button
+                            onClick={() => {
+                              bombFinance.watchAssetInMetamask('BShare');
+                            }}
+                          >
+                            {' '}
+                            <b>+</b>&nbsp;&nbsp;
+                            <img alt="metamask fox" style={{ width: '20px' }} src={MetamaskFox} />
+                          </Button></td>
                     </tr>
                     <tr>
+                    <th> <img alt="bbond" style={{ width: '30px' }} src={bbond} /></th>
                       <th scope="row">$BBOND</th>
                       <td> {roundAndFormatNumber(tBondCirculatingSupply, 2)}</td>
                       <td>{roundAndFormatNumber(tBondTotalSupply, 2)}</td>
                       <td>  {tBondPriceInBNB ? tBondPriceInBNB : '-.----'} BOND ${roundAndFormatNumber((tBondCirculatingSupply * tBondPriceInDollars).toFixed(2), 2)}</td>
+                      <td><Button
+                            onClick={() => {
+                              bombFinance.watchAssetInMetamask('BOND');
+                            }}
+                          >
+                            {' '}
+                            <b>+</b>&nbsp;&nbsp;
+                            <img alt="metamask fox" style={{ width: '20px' }} src={MetamaskFox} />
+                          </Button></td>
                     </tr>
                   </tbody>
                 </table>
@@ -114,21 +186,19 @@ const bShareCirculatingSupply = useMemo(
           <div className="rightTable">
             <div className="epoch">
               <h4>
-                Current Epoch <br />  {Number(currentEpoch)}
+              
+                Current Epoch <br />  {Number(currentEpoch)}<br /> 
+                Next Epoch in
               <ProgressCountdown   base={moment().toDate()} hideBar={true} deadline={to} description="Next Epoch" />
               </h4>
-              <h4 >
-               
-               <br />
-                Next Epoch in
-              </h4>
+              <br/>
             </div>
             <div className="epoch">
-              <h4>Live TWAP: 1.17</h4>
+              <h4>Live TWAP: {Number(bondStat?.tokenInFtm).toFixed(4) || '-'}</h4>
               <br />
-              TVL: $5,002,412
+              TVL: ${TVL.toFixed()}
               <br />
-              Last Epoch TWAP: 1.22
+              Last Epoch TWAP: {bondScale || '-'}
             </div>
           </div>
         </div>
@@ -165,33 +235,33 @@ const bShareCirculatingSupply = useMemo(
                   <div className="Boardroomsub">
                     <div className="Boardroomelement">Boardroom</div>
                     <div className="Boardroombutton">
-                      <button className="button">Recommmended</button>
+                      <span >Recommended</span>
                     </div>
                   </div>
                   <div className="Bshare">
                     <div className="Bshare1">
                       Stake BSHARE and earn BOMB every epoch
                     </div>
-                    <div className="Bshare1">TVL: $1,008,430</div>
+                    <div className="Bshare2">TVL: $1,008,430</div>
                   </div>
                   <hr />
 
                   <div className="Boardroom-below">
                     <div className="Boardroom-below-disc">
-                      Total stacked: 7323
+                      Total stacked: {getDisplayBalance(totalStaked)}
                     </div>
                     <div className="TVL">
                       <div className="Boardlower1">
                         <div className="Boardlower">
-                          Daily returns <br />
-                          2%
+                          Daily returns <br /><br />
+                          {Math.round(boardroomAPR.toFixed(2) / 365)}% 
                         </div>
                         <div className="Boardlower">
                           Your stake
-                          <br /> 124.21 ≈ $1171.62
+                          <br /> <br />{getDisplayBalance(stakedBalance)}  {`≈ $${tokenPriceInDollars}`}
                         </div>
                         <div className="Boardlower">
-                          Earned 6.4413 ≈ $298.88
+                          Earned <br /><br /> {getDisplayBalance(earnings)} {`≈ $${earnedInDollars}`}
                         </div>
                         <div className="parenboard">
                           <div className="motherBoard">
@@ -224,7 +294,7 @@ const bShareCirculatingSupply = useMemo(
 
       <div className="section-3">
         <div className="bombfarmshead">
-          <h3>Bomb Farms</h3>
+          <h2>Bomb Farms</h2>
         </div>
         <div className="tokenshead">
           <div className="token1">
@@ -236,18 +306,21 @@ const bShareCirculatingSupply = useMemo(
         </div>
         <div className="bombbtlower">
           <div className="bombbt1">
+          <img alt="bomb" style={{ width: '40px' }} src={bombbtc} />
             <h2>BOMB BTCB</h2>
           </div>
           <div className="bombbt2">
             <h2>
-              <button className="bombbt4">Recommmended</button>
+            <span >Recommended</span>
             </h2>
           </div>
-          <div className="TVL1">TVL: $1,008,430</div>
+          <div className="TVL1">TVL: ${statsOnPool?.TVL}</div>
         </div>
 
         <hr />
         <div className="s3_div2-content">
+          
+          
           <div className="s3-div2-content-table">
             <table className="table-dark" id="sec2table">
               <thead>
@@ -255,18 +328,20 @@ const bShareCirculatingSupply = useMemo(
                   <th scope="col"></th>
                   <th scope="col">Daily Returns:</th>
                   <th scope="col">Your stake</th>
-                  <th scope="col"></th>
+                  <th scope="col">Earned</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
                   <td></td>
-                  <td>2%</td>
-                  <td>6.0000 ≈ $1171.62</td>
-                  <td> 1660.4413 ≈ $298.88</td>
+                  <td>  {bank_.closedForStaking ? '0.00' : statsOnPool?.dailyAPR}%</td>
+                  <td>{statsOnPool_?.TVL}</td>
+                  <td>{bank.closedForStaking ? '0.00' : statsOnPool?.dailyAPR}</td>
                 </tr>
               </tbody>
             </table>
+            
+           
           </div>
           <div className="s3part">
             <div className="sec3-deposit">
@@ -286,14 +361,15 @@ const bShareCirculatingSupply = useMemo(
         <hr />
         <div className="bombbtlower">
           <div className="bombbt1">
+          <img alt="bshare" style={{ width: '40px' }} src={bsharebnb} />
             <h2>BSHARE-BNB</h2>
           </div>
           <div className="bombbt2">
             <h2>
-              <button className="bombbt4">Recommmended</button>
+            <span >Recommended</span>
             </h2>
           </div>
-          <div className="TVL1">TVL: $1,008,430</div>
+          <div className="TVL1">TVL: ${statsOnPool_?.TVL}</div>
         </div>
         <hr />
 
@@ -317,9 +393,9 @@ const bShareCirculatingSupply = useMemo(
               <tbody>
                 <tr>
                   <td className="dataval"></td>
-                  <td className="dataval">2%</td>
-                  <td className="dataval">6.0000 ≈ $1171.62</td>
-                  <td className="dataval"> 1660.4413 ≈ $298.88</td>
+                  <td className="dataval">{bank_.closedForStaking ? '0.00' : statsOnPool_?.dailyAPR}%</td>
+                  <td className="dataval">{statsOnPool_?.TVL}</td>
+                  <td className="dataval">{bank.closedForStaking ? '0.00' : statsOnPool?.dailyAPR}</td>
                 </tr>
               </tbody>
             </table>
@@ -342,6 +418,7 @@ const bShareCirculatingSupply = useMemo(
       <div className="section-3">
         <div className="Bonds">
           <h2>BONDS</h2>
+          <br/>
         </div>
         <div className="Bonds-content">
           BOND can be purchased only on contraction periods, when TWAP of BOMB
@@ -374,6 +451,7 @@ const bShareCirculatingSupply = useMemo(
         </div>
       </div>
     </div>
+    </Page>
   );
 }
 
